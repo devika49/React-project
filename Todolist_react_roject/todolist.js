@@ -20,6 +20,28 @@ function App() {
     setTasks(updatedTasks);
   }
 
+  function moveTaskUp(index) {
+    if (index > 0) {
+      const updatedTasks = [...tasks];
+      [updatedTasks[index], updatedTasks[index - 1]] = [
+        updatedTasks[index - 1],
+        updatedTasks[index],
+      ];
+      setTasks(updatedTasks);
+    }
+  }
+
+  function moveTaskDown(index) {
+    if (index < tasks.length - 1) {
+      const updatedTasks = [...tasks];
+      [updatedTasks[index], updatedTasks[index + 1]] = [
+        updatedTasks[index + 1],
+        updatedTasks[index],
+      ];
+      setTasks(updatedTasks);
+    }
+  }
+
   return (
     <div>
       <h1>To do list</h1>
@@ -36,9 +58,9 @@ function App() {
         {tasks.map((task, index) => (
           <li key={index}>
             <span>{task}</span>
-            <button onclick={() => deleteTask(index)}>Delete</button>
-            <button onclick={() => moveTaskup(index)}>up</button>
-            <button onclick={() => moveTaskdown(index)}>down</button>
+            <button onClick={() => deleteTask(index)}>Delete</button>
+            <button onClick={() => moveTaskUp(index)}>Up</button>
+            <button onClick={() => moveTaskDown(index)}>Down</button>
           </li>
         ))}
       </ol>
